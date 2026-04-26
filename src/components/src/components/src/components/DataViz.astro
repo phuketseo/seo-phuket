@@ -1,0 +1,255 @@
+<section class="section viz-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="caption">วิเคราะห์ข้อมูล</span>
+      <h2 class="section-title">เห็นแนวโน้ม<br>ไม่ใช่แค่ผลสุดท้าย</h2>
+      <p class="body-large">Case Study จริงจากกลุ่มร้านอาหารในภูเก็ต ตลอด 8 เดือน</p>
+    </div>
+    <div class="card viz-card reveal">
+      <div class="viz-header">
+        <div>
+          <h3 class="viz-title">Organic Sessions vs. อันดับคำค้นหา</h3>
+          <p class="viz-subtitle">กลุ่มร้านอาหารภูเก็ต • ม.ค. — ส.ค. 2025</p>
+        </div>
+        <div class="viz-legend">
+          <span class="legend-item">
+            <span class="legend-dot" style="background: #000;"></span>
+            Organic Sessions
+          </span>
+          <span class="legend-item">
+            <span class="legend-dot" style="background: var(--text-secondary);"></span>
+            Keywords Top 10
+          </span>
+        </div>
+      </div>
+      <div class="chart-wrap" id="chart-wrap">
+        <svg class="chart-svg" id="chart" viewBox="0 0 900 320" preserveAspectRatio="none">
+          <line class="chart-grid" x1="60" y1="260" x2="880" y2="260"/>
+          <line class="chart-grid" x1="60" y1="195" x2="880" y2="195"/>
+          <line class="chart-grid" x1="60" y1="130" x2="880" y2="130"/>
+          <line class="chart-grid" x1="60" y1="65" x2="880" y2="65"/>
+          <text class="chart-axis" x="50" y="264" text-anchor="end">0</text>
+          <text class="chart-axis" x="50" y="199" text-anchor="end">500</text>
+          <text class="chart-axis" x="50" y="134" text-anchor="end">1K</text>
+          <text class="chart-axis" x="50" y="69" text-anchor="end">1.5K</text>
+          <text class="chart-axis" x="50" y="20" text-anchor="end">2K</text>
+          <text class="chart-axis" x="102" y="280" text-anchor="middle">ม.ค.</text>
+          <text class="chart-axis" x="214" y="280" text-anchor="middle">ก.พ.</text>
+          <text class="chart-axis" x="326" y="280" text-anchor="middle">มี.ค.</text>
+          <text class="chart-axis" x="438" y="280" text-anchor="middle">เม.ย.</text>
+          <text class="chart-axis" x="550" y="280" text-anchor="middle">พ.ค.</text>
+          <text class="chart-axis" x="662" y="280" text-anchor="middle">มิ.ย.</text>
+          <text class="chart-axis" x="774" y="280" text-anchor="middle">ก.ค.</text>
+          <text class="chart-axis" x="886" y="280" text-anchor="middle">ส.ค.</text>
+          <path class="chart-area" id="area-sessions" fill="#000" d=""/>
+          <path class="chart-area" id="area-keywords" fill="#86868b" d=""/>
+          <path class="chart-line" id="line-sessions" stroke="#000" d=""/>
+          <path class="chart-line" id="line-keywords" stroke="#86868b" d=""/>
+          <g id="points-sessions"></g>
+          <g id="points-keywords"></g>
+        </svg>
+        <div class="chart-tooltip" id="tooltip"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .viz-section { background: var(--bg-warm); }
+  .viz-card { padding: 64px; }
+
+  @media (max-width: 768px) {
+    .viz-card { padding: 32px; }
+  }
+
+  .viz-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .viz-title {
+    font-size: 28px;
+    font-weight: 300;
+    letter-spacing: -0.021em;
+  }
+
+  .viz-subtitle {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+  }
+
+  .viz-legend {
+    display: flex;
+    gap: 24px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+
+  .legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .chart-wrap {
+    position: relative;
+    height: 320px;
+  }
+
+  .chart-svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .chart-grid {
+    stroke: var(--border-light);
+    stroke-width: 1;
+  }
+
+  .chart-axis {
+    fill: var(--text-tertiary);
+    font-size: 11px;
+    font-family: var(--font);
+    font-weight: 400;
+  }
+
+  .chart-line {
+    fill: none;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .chart-area { opacity: 0.05; }
+
+  .chart-tooltip {
+    position: absolute;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    font-size: 13px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s;
+    box-shadow: var(--shadow-card-hover);
+    z-index: 10;
+  }
+</style>
+
+<script>
+  const sData = [120, 180, 290, 450, 680, 920, 1350, 1680];
+  const kData = [5, 8, 15, 28, 42, 58, 72, 89];
+  const mo = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.'];
+
+  function drawChart() {
+    const w = 900, h = 320;
+    const p = { t: 20, r: 40, b: 40, l: 60 };
+    const cw = w - p.l - p.r;
+    const ch = h - p.t - p.b;
+    const maxS = 2000, maxK = 100;
+
+    const gx = i => p.l + (i / (sData.length - 1)) * cw;
+    const gYS = v => p.t + ch - (v / maxS) * ch;
+    const gYK = v => p.t + ch - (v / maxK) * ch;
+
+    function smooth(data, getY) {
+      let d = `M ${gx(0)} ${getY(data[0])}`;
+      for (let i = 1; i < data.length; i++) {
+        const x = gx(i), y = getY(data[i]);
+        const px = gx(i-1), py = getY(data[i-1]);
+        const c1 = px + (x - px) / 3;
+        const c2 = x - (x - px) / 3;
+        d += ` C ${c1} ${py}, ${c2} ${y}, ${x} ${y}`;
+      }
+      return d;
+    }
+
+    const sp = smooth(sData, gYS);
+    const kp = smooth(kData, gYK);
+
+    document.getElementById('line-sessions').setAttribute('d', sp);
+    document.getElementById('line-keywords').setAttribute('d', kp);
+
+    document.getElementById('area-sessions').setAttribute('d', sp + ` L ${gx(sData.length-1)} ${p.t+ch} L ${gx(0)} ${p.t+ch} Z`);
+    document.getElementById('area-keywords').setAttribute('d', kp + ` L ${gx(kData.length-1)} ${p.t+ch} L ${gx(0)} ${p.t+ch} Z`);
+
+    const ps = document.getElementById('points-sessions');
+    const pk = document.getElementById('points-keywords');
+
+    sData.forEach((v, i) => {
+      const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      c.setAttribute('cx', gx(i));
+      c.setAttribute('cy', gYS(v));
+      c.setAttribute('r', '4');
+      c.setAttribute('fill', '#000');
+      c.setAttribute('stroke', '#fff');
+      c.setAttribute('stroke-width', '2');
+      c.style.cursor = 'pointer';
+      c.dataset.v = v;
+      c.dataset.m = mo[i];
+      c.dataset.t = 'sessions';
+      ps.appendChild(c);
+    });
+
+    kData.forEach((v, i) => {
+      const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      c.setAttribute('cx', gx(i));
+      c.setAttribute('cy', gYK(v));
+      c.setAttribute('r', '4');
+      c.setAttribute('fill', '#86868b');
+      c.setAttribute('stroke', '#fff');
+      c.setAttribute('stroke-width', '2');
+      c.style.cursor = 'pointer';
+      c.dataset.v = v;
+      c.dataset.m = mo[i];
+      c.dataset.t = 'keywords';
+      pk.appendChild(c);
+    });
+
+    const tip = document.getElementById('tooltip');
+    const wrap = document.getElementById('chart-wrap');
+
+    document.querySelectorAll('#points-sessions circle, #points-keywords circle').forEach(pt => {
+      pt.addEventListener('mouseenter', (e) => {
+        const r = wrap.getBoundingClientRect();
+        const x = e.clientX - r.left;
+        const y = e.clientY - r.top;
+        const type = pt.dataset.t === 'sessions' ? 'Organic Sessions' : 'Keywords Top 10';
+        const color = pt.dataset.t === 'sessions' ? '#000' : '#86868b';
+
+        tip.innerHTML = `
+          <div style="color: var(--text-tertiary); font-size: 11px;">${pt.dataset.m}</div>
+          <div style="color: ${color}; font-weight: 600; font-size: 14px; margin-top: 4px;">${parseInt(pt.dataset.v).toLocaleString()}</div>
+          <div style="color: var(--text-secondary); font-size: 11px; margin-top: 2px;">${type}</div>
+        `;
+        tip.style.left = `${Math.min(x + 12, r.width - 160)}px`;
+        tip.style.top = `${Math.max(y - 70, 0)}px`;
+        tip.style.opacity = '1';
+      });
+      pt.addEventListener('mouseleave', () => { tip.style.opacity = '0'; });
+    });
+  }
+
+  const chartObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        drawChart();
+        chartObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  chartObs.observe(document.getElementById('chart-wrap'));
+</script>
