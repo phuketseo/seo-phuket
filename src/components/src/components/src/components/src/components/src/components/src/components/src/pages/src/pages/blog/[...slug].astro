@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SchemaLocalBusiness from '../../components/SchemaLocalBusiness.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<BaseLayout 
+  title={post.data.title}
+  description={post.data.description}
+>
+  <SchemaLocalBusiness slot="schema" />
+  <article class="section">
+    <div class="container">
+      <header style="margin-bottom: 64px;">
+        <span class="caption">{post.data.pubDate.toLocaleDateString('th-TH')}</span>
+        <h1 class="section-title" style="margin-top: 16px;">{post.data.title}</h1>
+        <p class="body-large" style="margin-top: 16px;">{post.data.description}</p>
+      </header>
+      <div class="prose">
+        <Content />
+      </div>
+    </div>
+  </article>
+</BaseLayout>
