@@ -1,0 +1,71 @@
+<section id="process" class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="caption">กระบวนการ</span>
+      <h2 class="section-title">โปร่งใส<br>ในทุกขั้นตอน</h2>
+      <p class="body-large">ไม่มีกล่องดำ คุณเห็นข้อมูล การตัดสินใจ และผลลัพธ์อย่างต่อเนื่อง</p>
+    </div>
+    <div class="process-grid">
+      <div class="process-card reveal">
+        <span class="process-num">01</span>
+        <h3 class="card-title">สร้าง Baseline</h3>
+        <p class="body">รวบรวมข้อมูลทุกจุดจากผลงานปัจจุบัน — Search Console, Analytics, อันดับคำค้นหา, สุขภาพเทคนิค — เพื่อสร้างเส้นเริ่มต้นที่ชัดเจน</p>
+      </div>
+      <div class="process-card reveal reveal-delay-1">
+        <span class="process-num">02</span>
+        <h3 class="card-title">วิเคราะห์ช่องโหว่</h3>
+        <p class="body">หาว่าคู่แข่งติดอันดับอย่างไรและทำไม จากนั้นหาโอกาสที่พวกเขาพลาด — คำค้นหา ช่องว่าง Content และข้อได้เปรียบทางเทคนิค</p>
+      </div>
+      <div class="process-card reveal">
+        <span class="process-num">03</span>
+        <h3 class="card-title">ลงมือและติดตาม</h3>
+        <p class="body">ทุกการเปลี่ยนแปลงบันทึกพร้อมผลกระทบที่คาดการณ์ไว้ ติดตามอันดับรายวัน Traffic รายสัปดาห์ และ Conversion อย่างต่อเนื่อง</p>
+      </div>
+      <div class="process-card reveal reveal-delay-1">
+        <span class="process-num">04</span>
+        <h3 class="card-title">วนรอบปรับปรุง</h3>
+        <p class="body">ทบทวนข้อมูลทุก 2 สัปดาห์ ถ้าอะไรไม่เวิร์ก เห็นทันทีและปรับตัว — ไม่ต้องรอรายงานสิ้นเดือนเพื่อค้นพบปัญหา</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .process-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  @media (min-width: 768px) {
+    .process-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .process-card {
+    padding: 48px;
+    border-radius: var(--radius-lg);
+    background: var(--bg-warm);
+    border: 1px solid var(--border-light);
+    transition: all 0.4s var(--ease);
+  }
+
+  .process-card:hover {
+    background: var(--bg);
+    box-shadow: var(--shadow-card);
+    transform: translateY(-2px);
+  }
+
+  .process-num {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
+  }
+
+  .process-card .card-title { margin-bottom: 12px; }
+
+  @media (max-width: 768px) {
+    .process-card { padding: 32px; }
+  }
+</style>
