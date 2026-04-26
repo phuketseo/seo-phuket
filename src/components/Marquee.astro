@@ -1,0 +1,79 @@
+<div class="marquee-wrap">
+  <div class="marquee-track" id="marquee">
+    <div class="marquee-item">
+      <span class="marquee-value">+247%</span>
+      <span class="marquee-label">Organic Traffic</span>
+    </div>
+    <div class="marquee-item">
+      <span class="marquee-value">3.2</span>
+      <span class="marquee-label">อันดับเฉลี่ย</span>
+    </div>
+    <div class="marquee-item">
+      <span class="marquee-value">89</span>
+      <span class="marquee-label">คำค้นหาติด Top 3</span>
+    </div>
+    <div class="marquee-item">
+      <span class="marquee-value">4.8%</span>
+      <span class="marquee-label">Conversion Rate</span>
+    </div>
+    <div class="marquee-item">
+      <span class="marquee-value">47</span>
+      <span class="marquee-label">ธุรกิจในภูเก็ต</span>
+    </div>
+    <div class="marquee-item">
+      <span class="marquee-value">+189%</span>
+      <span class="marquee-label">GMB Views</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .marquee-wrap {
+    padding: 60px 0;
+    border-top: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--border-light);
+    background: var(--bg-warm);
+    overflow: hidden;
+  }
+
+  .marquee-track {
+    display: flex;
+    gap: 48px;
+    animation: scroll 40s linear infinite;
+    width: max-content;
+  }
+
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .marquee-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    min-width: 200px;
+    padding: 0 24px;
+    border-right: 1px solid var(--border-light);
+  }
+
+  .marquee-value {
+    font-size: 32px;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .marquee-label {
+    font-size: 12px;
+    color: var(--text-secondary);
+    letter-spacing: -0.01em;
+  }
+</style>
+
+<script>
+  const mq = document.getElementById('marquee');
+  mq.innerHTML = mq.innerHTML + mq.innerHTML;
+</script>
