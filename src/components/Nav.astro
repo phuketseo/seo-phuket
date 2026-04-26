@@ -1,0 +1,89 @@
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <div class="nav-logo-mark">P</div>
+      Phuket SEO
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services">บริการ</a></li>
+      <li><a href="#process">กระบวนการ</a></li>
+      <li><a href="#proof">ผลงาน</a></li>
+    </ul>
+    <a href="#contact" class="btn btn-primary nav-cta">ติดต่อเรา</a>
+  </div>
+</nav>
+
+<style>
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(255,255,255,0.72);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid var(--border-light);
+    transition: background var(--duration) var(--ease);
+  }
+
+  .nav-inner {
+    max-width: 1020px;
+    margin: 0 auto;
+    padding: 0 48px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-size: 21px;
+    font-weight: 500;
+    letter-spacing: -0.021em;
+    color: var(--text);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .nav-logo-mark {
+    width: 28px;
+    height: 28px;
+    background: var(--text);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .nav-links {
+    display: none;
+    align-items: center;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    text-decoration: none;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+  }
+
+  .nav-links a:hover { opacity: 1; }
+
+  .nav-cta { display: none; }
+
+  @media (min-width: 768px) {
+    .nav-links { display: flex; }
+    .nav-cta { display: inline-flex; }
+  }
+</style>
