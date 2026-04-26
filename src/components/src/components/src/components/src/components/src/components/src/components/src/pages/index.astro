@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SchemaLocalBusiness from '../components/SchemaLocalBusiness.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import Marquee from '../components/Marquee.astro';
+import Services from '../components/Services.astro';
+import DataViz from '../components/DataViz.astro';
+import Process from '../components/Process.astro';
+import Proof from '../components/Proof.astro';
+import CTA from '../components/CTA.astro';
+---
+
+<BaseLayout 
+  title="Phuket SEO — วิเคราะห์ข้อมูล ปักหมุดอันดับ"
+  description="บริการ SEO ภูเก็ตที่ขับเคลื่อนด้วยข้อมูลจริง ไม่เดาเอา วัดผลได้ทุกตัวเลข"
+>
+  <SchemaLocalBusiness slot="schema" />
+  <Nav />
+  <Hero />
+  <Marquee />
+  <Services />
+  <DataViz />
+  <Process />
+  <Proof />
+  <CTA />
+</BaseLayout>
